@@ -12,7 +12,6 @@
         --accent-blue: #1f4e79;
         --text-white: #ffffff;
         --text-gray: #cccccc;
-        --card-shadow: rgba(255, 215, 0, 0.1);
         --hover-glow: rgba(255, 215, 0, 0.3);
     }
 
@@ -24,27 +23,78 @@
     }
 
     body {
-        background-color: var(--primary-dark);
-        color: var(--text-white);
         height: 100vh;
+        width: 100%;
+        background-color: var(--primary-dark);
         display: flex;
-        align-items: flex-end;
-        justify-content: center;
-        background-image: linear-gradient(to top, rgba(26,26,46,0.8), rgba(0,0,0,0.1)), url('1000098331.jpg');
-        background-size: cover;
-        background-position: center;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        overflow: hidden;
+        color: var(--text-white);
+        position: relative;
     }
 
-    .content {
+    /* TOP LOGOS */
+    .top-logos {
+        width: 100%;
         text-align: center;
-        padding: 40px 20px;
-        animation: fadeInUp 1.5s ease forwards;
+        padding: 15px 0;
+        z-index: 3;
+    }
+
+    .top-logos img {
+        height: 55px;
+        margin: 0 15px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 0 20px var(--hover-glow);
+        animation: fadeInDown 1.2s ease forwards;
+    }
+
+    /* SMOOTH BACKGROUND SCROLL */
+    .image-scroll {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        width: calc(100vw * 4); /* 4x width for seamless loop */
+        height: 100vh;
+        animation: scrollBG 40s linear infinite;
+    }
+
+    .image-scroll img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        filter: brightness(0.85);
+        flex-shrink: 0;
+    }
+
+    /* Overlay for dark gradient */
+    .overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to top, rgba(26,26,46,0.9), rgba(0,0,0,0.2));
+        z-index: 1;
+    }
+
+    /* TEXT + CTA */
+    .content {
+        position: absolute;
+        bottom: 10%;
+        width: 100%;
+        text-align: center;
+        padding: 0 25px;
+        z-index: 2;
+        animation: fadeInUp 1.8s ease forwards;
     }
 
     .content h1 {
         font-size: 1.4em;
         font-weight: 600;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 
     .content p {
@@ -57,7 +107,7 @@
         background: var(--accent-gold);
         color: var(--primary-dark);
         border: none;
-        padding: 12px 30px;
+        padding: 12px 35px;
         border-radius: 25px;
         font-weight: bold;
         cursor: pointer;
@@ -70,18 +120,54 @@
         transform: scale(1.05);
     }
 
+    /* ANIMATIONS */
+    @keyframes scrollBG {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-200vw); } /* smooth and infinite */
+    }
+
     @keyframes fadeInUp {
         from { opacity: 0; transform: translateY(30px); }
         to { opacity: 1; transform: translateY(0); }
     }
+
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+        .content h1 { font-size: 1.2em; }
+        .top-logos img { height: 45px; }
+    }
 </style>
 </head>
 <body>
+
+    <!-- LOGOS -->
+    <div class="top-logos">
+        <img src="https://i.ibb.co/6czKyckt/1000034835-removebg-preview.png">
+        <img src="https://i.ibb.co/7dxg4Ctf/1000098990-removebg-preview.png">
+        <img src="https://i.ibb.co/LDQwy14W/download-1.jpg">
+    </div>
+
+    <!-- SMOOTH SCROLLING BACKGROUND -->
+    <div class="image-scroll">
+        <img src="https://i.ibb.co/tpJf0qMF/1000098738-removebg-preview.png">
+        <img src="https://i.ibb.co/TM7KnHkT/1000098749-removebg-preview.png">
+        <!-- duplicate for seamless looping -->
+        <img src="https://i.ibb.co/tpJf0qMF/1000098738-removebg-preview.png">
+        <img src="https://i.ibb.co/TM7KnHkT/1000098749-removebg-preview.png">
+    </div>
+
+    <div class="overlay"></div>
+
+    <!-- TEXT -->
     <div class="content">
-        
         <h1>Experience The Game With Instant Live Scores</h1>
         <p>Get closer to the action with instant football scores, real-time updates, and seamless match coverage anywhere.</p>
-        <button class="btn" onclick="window.location.href='main.html'">Get Started</button>
+        <button class="btn" onclick="window.location.href='home.html'">Get Started</button>
     </div>
+
 </body>
 </html>
